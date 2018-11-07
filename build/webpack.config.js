@@ -4,12 +4,12 @@ const webpack = require('webpack')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const ExtractTextPlugin = require('extract-text-webpack-plugin')
 const project = require('../project.config')
-const HappyPack = require('happypack')
+// const HappyPack = require('happypack')
 // const happyThreadPool = HappyPack.ThreadPool({ size: 5 })
 
 const inProject = path.resolve.bind(path, project.basePath)
 const inProjectSrc = file => inProject(project.srcDir, file)
-const SetVersion = require('./plugins/SetVersion')
+// const SetVersion = require('./plugins/SetVersion')
 
 const __DEV__ = project.env === 'development' || project.env === 'predev'
 const __TEST__ = project.env === 'test'
@@ -17,19 +17,19 @@ const __PROD__ = project.env === 'production' || project.env === 'pretest'
 
 const pkg = require('../package.json')
 
-let theme = {}
+// let theme = {}
 
-if (pkg.theme && typeof pkg.theme === 'string') {
-  let cfgPath = pkg.theme
-  // relative path
-  if (cfgPath.charAt(0) === '.') {
-    cfgPath = path.resolve(__dirname, '../', cfgPath)
-  }
-  const getThemeConfig = require(cfgPath)
-  theme = getThemeConfig()
-} else if (pkg.theme && typeof pkg.theme === 'object') {
-  theme = pkg.theme
-}
+// if (pkg.theme && typeof pkg.theme === 'string') {
+//   let cfgPath = pkg.theme
+//   // relative path
+//   if (cfgPath.charAt(0) === '.') {
+//     cfgPath = path.resolve(__dirname, '../', cfgPath)
+//   }
+//   const getThemeConfig = require(cfgPath)
+//   theme = getThemeConfig()
+// } else if (pkg.theme && typeof pkg.theme === 'object') {
+//   theme = pkg.theme
+// }
 
 const config = {
   entry: {
@@ -49,7 +49,6 @@ const config = {
       vctns: path.resolve(__dirname, '../src/containers/'),
       vassets: path.resolve(__dirname, '../src/assets/'),
       vstore: path.resolve(__dirname, '../src/store/'),
-      vadmin: path.resolve(__dirname, '../src/routes/Admin/'),
       vi18n: path.resolve(__dirname, '../src/i18n/'),
       vbuild: path.resolve(__dirname, '../build/'),
       vcfg: path.resolve(__dirname, '../config/'),
@@ -102,19 +101,6 @@ config.module.rules.push({
             useBuiltIns: true // we polyfill Object.assign in src/normalize.js
           },
         ],
-        // [
-        //   'import', [
-        //     {
-        //       'libraryName': 'antd',
-        //       'style': true
-        //     },
-        //     {
-        //       'libraryName': 'antd-mobile',
-        //       'libraryDirectory': 'lib',
-        //       'style': true
-        //     }
-        //   ]
-        // ]
       ],
       presets: [
         'babel-preset-react',
@@ -200,24 +186,12 @@ config.module.rules.push({
           }
         }
       },
-      // {
-      //   loader: 'postcss-loader',
-      //   options: {
-      //     sourceMap: project.sourcemaps,
-      //     includePaths: [
-      //       inProjectSrc('styles'),
-      //     ],
-      //     plugins: (loader) => [
-      //       require('postcss-pxtorem')({ rootValue: PX2REM_ROOT, propWhiteList: [] }),
-      //     ]
-      //   },
-      // },
       {
         loader: 'less-loader',
         options: {
           sourceMap: project.sourcemaps,
           includePaths: [inProjectSrc('styles')],
-          modifyVars: theme
+          // modifyVars: theme
         }
       }
     ]
@@ -225,19 +199,30 @@ config.module.rules.push({
 })
 config.module.rules.push({
   test: /\.css$/,
-  use: ExtractTextPlugin.extract({
-    // use: ['happypack/loader?id=css']
-  })
-  use: ExtractTextPlugin.extract({
+  loader: extractStyles.extract({
     fallback: 'style-loader',
     use: [
       {
         loader: 'css-loader',
         options: {
-          sourceMap: true,
-          minimize: true
+          sourceMap: project.sourcemaps,
+          minimize: {
+            autoprefixer: {
+              add: true,
+              remove: true,
+              browsers: ['last 2 versions']
+            },
+            discardComments: {
+              removeAll: true
+            },
+            discardUnused: false,
+            mergeIdents: false,
+            reduceIdents: false,
+            safe: true,
+            sourcemap: project.sourcemaps
+          }
         }
-      },
+      }
     ]
   })
 })
@@ -272,7 +257,7 @@ config.module.rules.push({
     //       speed: 4
     //     }
     //   }
-    }
+    // }
   ]
 })
 
@@ -299,92 +284,6 @@ config.module.rules.push({
     }
   })
 })
-
-// Markdown
-config.module.rules.push({
-  test: /\.md$/,
-  exclude: /node_modules/,
-  use: 'raw-loader'
-})
-
-// Happypack
-config.plugins.push(
-  new HappyPack({
-    // 用唯一的标识符 id 来代表当前的HappyPack 是用来处理一类特定的文件
-    // id: 'babel',
-    // threads: 4,
-    // threadPool: happyThreadPool,
-    // 如何处理 .js 文件，用法和 Loader配置中一样
-    loaders: [
-      {
-        loader: 'babel-loader',
-        query: {
-          cacheDirectory: true,
-          plugins: [
-            'babel-plugin-transform-class-properties',
-            'babel-plugin-syntax-dynamic-import',
-            [
-              'babel-plugin-transform-runtime',
-              {
-                helpers: true,
-                polyfill: false, // we polyfill needed features in src/normalize.js
-                regenerator: true
-              }
-            ],
-            [
-              'babel-plugin-transform-object-rest-spread',
-              {
-                useBuiltIns: true // we polyfill Object.assign in src/normalize.js
-              }
-            ],
-            [
-              'import',
-              [
-                {
-                  libraryName: 'antd',
-                  style: true
-                }
-              ]
-            ]
-          ],
-          presets: [
-            'babel-preset-react',
-            [
-              'babel-preset-env',
-              {
-                modules: false,
-                targets: {
-                  ie9: true
-                },
-                uglify: true
-              }
-            ]
-          ]
-        }
-      }
-    ]
-  })
-)
-
-config.plugins.push(
-  new HappyPack({
-    id: 'css',
-    threads: 4,
-    // threadPool: happyThreadPool,
-    loaders: [
-      {
-        loader: 'style-loader'
-      },
-      {
-        loader: 'css-loader',
-        options: {
-          sourceMap: true,
-          minimize: true
-        }
-      }
-    ]
-  })
-)
 
 // HTML Template
 // ------------------------------------
