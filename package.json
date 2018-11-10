@@ -43,7 +43,8 @@
     "redux": "^3.7.2",
     "redux-auth-wrapper": "^2.0.2",
     "redux-thunk": "^2.2.0",
-    "store": "^2.0.12"
+    "store": "^2.0.12",
+    "todomvc-app-css": "^2.1.2"
   },
   "devDependencies": {
     "babel-core": "^6.24.1",

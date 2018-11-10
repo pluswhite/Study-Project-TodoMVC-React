@@ -17,14 +17,15 @@ class PageLayout extends Component {
     const { children } = this.props
 
     return (
-      <div className='container text-center'>
-        <h1>TodoMVC of React</h1>
-        {/* <IndexLink to='/' activeClassName='page-layout__nav-item--active'>Home</IndexLink>
-        {' · '}
-        <Link to='/counter' activeClassName='page-layout__nav-item--active'>Counter</Link> */}
-        <div className='page-layout__viewport'>
-          {children}
-        </div>
+      <div className='page-layout__viewport'>
+        {children}
+
+        <footer className='info'>
+          <p>Double-click to edit a todo</p>
+          <p>Template by <a href='http://sindresorhus.com'>Sindre Sorhus</a></p>
+          <p>Created by <a href='http://todomvc.com'>you</a></p>
+          <p>Part of <a href='http://todomvc.com'>TodoMVC</a></p>
+        </footer>
       </div>
     )
   }

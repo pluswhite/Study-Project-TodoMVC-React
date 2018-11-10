@@ -1,5 +1,5 @@
 @import 'base';
-// @import '~bootstrap/scss/bootstrap.scss';
+@import '~todomvc-app-css/index.css';
 
 // Some best-practice CSS that's useful for most apps
 // Just remove them if they're not what you want
@@ -14,8 +14,12 @@ body {
   height: 100%;
 }
 
-*,
-*:before,
-*:after {
-  box-sizing: inherit;
+body {
+  margin: 0 auto;
 }
+
+// *,
+// *:before,
+// *:after {
+//   box-sizing: inherit;
+// }
