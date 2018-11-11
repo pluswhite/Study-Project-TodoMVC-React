@@ -1,7 +1,9 @@
 import React, { Component } from 'react'
-import './HomeView.scss'
+// import './TodoApp.scss'
+import TodoItem from 'vcms/TodoItem'
+import Footer from 'vcms/Footer'
 
-class HomeView extends Component {
+class TodoApp extends Component {
   constructor (props) {
     super(props)
     this.state = {}
@@ -18,7 +20,8 @@ class HomeView extends Component {
           <input id='toggle-all' className='toggle-all' type='checkbox' />
           <label htmlFor='toggle-all'>Mark all as complete</label>
           <ul className='todo-list'>
-            <li className='completed'>
+            <TodoItem />
+            {/* <li className='completed'>
               <div className='view'>
                 <input className='toggle' type='checkbox' checked />
                 <label>Taste JavaScript</label>
@@ -49,10 +52,11 @@ class HomeView extends Component {
                 <button className='destroy' />
               </div>
               <input className='edit' value='Rule the web' />
-            </li>
+            </li> */}
           </ul>
         </section>
-        <footer className='footer'>
+        <Footer />
+        {/* <footer className='footer'>
           <span className='todo-count'><strong>0</strong> item left</span>
           <ul className='filters'>
             <li>
@@ -66,10 +70,10 @@ class HomeView extends Component {
             </li>
           </ul>
           <button className='clear-completed'>Clear completed</button>
-        </footer>
+        </footer> */}
       </section>
     )
   }
 }
 
-export default HomeView
+export default TodoApp
