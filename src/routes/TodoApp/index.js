@@ -1,10 +1,4 @@
 import { injectReducer } from 'vstore/reducers'
-// import TodoApp from './containers/TodoAppContainer'
-
-// Sync route definition
-// export default {
-//   component : TodoApp
-// }
 
 export default (store) => ({
   getComponent (nextState, cb) {

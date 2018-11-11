@@ -5,41 +5,49 @@
 /**
  * Constants
  */
-export const UPDATE_LIST_POSTS = 'UPDATE_LIST_POSTS'
-export const UPDATE_LIST_SUCCESS = 'UPDATE_LIST_SUCCESS'
-export const UPDATE_LIST_FAILURE = 'UPDATE_LIST_FAILURE'
+export const ADD_LIST_POSTS = 'ADD_LIST_POSTS'
+export const ADD_LIST_SUCCESS = 'ADD_LIST_SUCCESS'
+export const ADD_LIST_FAILURE = 'ADD_LIST_FAILURE'
+
+export const CHANGE_TODO_STATUS_POSTS = 'CHANGE_TODO_STATUS_POSTS'
+export const CHANGE_TODO_STATUS_SUCCESS = 'CHANGE_TODO_STATUS_SUCCESS'
+export const CHANGE_TODO_STATUS_FAILURE = 'CHANGE_TODO_STATUS_FAILURE'
 
 /**
  * Action Creators
  */
-export const updateListPosts = () => {
+export const addListPosts = () => {
   return {
-    type: UPDATE_LIST_POSTS
+    type: ADD_LIST_POSTS
   }
 }
 
-export const updateListSuccess = data => {
+export const addListSuccess = data => {
   return {
-    type: UPDATE_LIST_SUCCESS,
+    type: ADD_LIST_SUCCESS,
     payload: {
       data
     }
   }
 }
 
-export const updateListFailure = () => {
+export const addListFailure = () => {
   return {
-    type: UPDATE_LIST_FAILURE
+    type: ADD_LIST_FAILURE
   }
 }
 
 /**
  * Tools Methods
  */
-export const updateTodoList = () => {
+export const addTodoList = (newTodo) => {
   return (dispatch) => {
-    dispatch(updateListPosts())
-    dispatch(updateListSuccess())
+    dispatch(addListPosts())
+    try {
+      dispatch(addListSuccess(newTodo))
+    } catch (err) {
+      dispatch(addListFailure())
+    }
   }
 }
 
@@ -47,19 +55,22 @@ export const updateTodoList = () => {
  * Action Handlers
  */
 const TODO_APP_ACTION_HANDLERS = {
-  [UPDATE_LIST_POSTS]: (state) => {
+  [ADD_LIST_POSTS]: (state) => {
     return ({
       ...state,
       isLoading: true
     })
   },
-  [UPDATE_LIST_SUCCESS]: (state, action) => {
+  [ADD_LIST_SUCCESS]: (state, action) => {
+    // console.log(state)
+    // console.log(action)
     return ({
       ...state,
+      todos: state.todos.concat(action.payload.data),
       isLoading: false
     })
   },
-  [UPDATE_LIST_FAILURE]: (state) => {
+  [ADD_LIST_FAILURE]: (state) => {
     return ({
       ...state,
       isLoading: false
@@ -72,7 +83,28 @@ const TODO_APP_ACTION_HANDLERS = {
  */
 const initialState = {
   isLoading: false,
-  todos: [],
+  todos: [
+    {
+      id: 0,
+      text: 'Eat food',
+      completed: true
+    },
+    {
+      id: 1,
+      text: 'Exercise',
+      completed: false
+    },
+    {
+      id: 2,
+      text: 'Running',
+      completed: false
+    },
+    {
+      id: 3,
+      text: 'Reading',
+      completed: false
+    },
+  ],
   visibilityFilter: 'SHOW_ALL'
 }
 
