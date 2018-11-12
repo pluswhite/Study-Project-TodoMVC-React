@@ -11,6 +11,14 @@ export default class TodoItem extends Component {
     this.state = {}
   }
 
+  handleItemStatusChange = () => {
+
+  }
+
+  handleItemTextChange = () => {
+
+  }
+
   render () {
     const { todo } = this.props
     // console.log(todo)
@@ -19,11 +27,11 @@ export default class TodoItem extends Component {
     return (
       <li>
         <div className='view'>
-          <input className='toggle' type='checkbox' checked={completed} />
+          <input className='toggle' type='checkbox' checked={completed} onChange={this.handleItemStatusChange} />
           <label>{text}</label>
           <button className='destroy' />
         </div>
-        <input className='edit' value='Rule the web' />
+        <input className='edit' value={text} onChange={this.handleItemTextChange} />
       </li>
     )
   }

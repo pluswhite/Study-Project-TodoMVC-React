@@ -108,7 +108,7 @@ const initialState = {
   visibilityFilter: 'SHOW_ALL'
 }
 
-export default function TotodAPPReducer (state = initialState, action) {
+export default function TotodAppReducer (state = initialState, action) {
   const handler = TODO_APP_ACTION_HANDLERS[action.type]
 
   return handler ? handler(state, action) : state

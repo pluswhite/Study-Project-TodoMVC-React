@@ -2,13 +2,15 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 
 export default class Footer extends Component {
-  static propTypes = {
-    prop: PropTypes
-  }
+  // static propTypes = {
+  //   infos: PropTypes
+  // }
 
   constructor (props) {
     super(props)
-    this.state = {}
+    this.state = {
+      // infos: props.infos
+    }
   }
 
   render () {

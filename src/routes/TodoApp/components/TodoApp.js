@@ -38,11 +38,11 @@ class TodoApp extends Component {
     // console.log(newTodo)
     // console.log(currentId)
     if (newTodo.trim()) {
-      console.log({
-        id: currentId,
-        text: newTodo,
-        completed: false
-      })
+      // console.log({
+      //   id: currentId,
+      //   text: newTodo,
+      //   completed: false
+      // })
       this.props.addTodoList({
         id: currentId,
         text: newTodo,
