@@ -5,7 +5,8 @@ import classnames from 'classnames'
 export default class TodoItem extends Component {
   static propTypes = {
     todo: PropTypes.object,
-    onToggleStatus: PropTypes.func
+    onToggleStatus: PropTypes.func,
+    onDeleteItem: PropTypes.func
   }
 
   constructor (props) {
@@ -13,7 +14,7 @@ export default class TodoItem extends Component {
     this.state = {}
   }
 
-  handleItemStatusChange = (evt) => {
+  handleItemStatusChange = () => {
     const { onToggleStatus, todo } = this.props
     onToggleStatus(todo)
   }
@@ -22,8 +23,15 @@ export default class TodoItem extends Component {
 
   }
 
+  handleItemDelete = () => {
+    const { onDeleteItem, todo } = this.props
+    onDeleteItem(todo)
+  }
+
   render () {
-    const { todo } = this.props
+    const {
+      todo
+    } = this.props
     // console.log(todo)
     const { text, completed } = todo
 
@@ -36,7 +44,7 @@ export default class TodoItem extends Component {
         <div className='view'>
           <input className='toggle' type='checkbox' checked={completed} onChange={this.handleItemStatusChange} />
           <label>{text}</label>
-          <button className='destroy' />
+          <button className='destroy' onClick={this.handleItemDelete} />
         </div>
         <input className='edit' value={text} onChange={this.handleItemTextChange} />
       </li>

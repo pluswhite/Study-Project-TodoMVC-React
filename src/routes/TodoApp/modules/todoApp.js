@@ -5,9 +5,13 @@
 /**
  * Constants
  */
-export const ADD_LIST_POSTS = 'ADD_LIST_POSTS'
-export const ADD_LIST_SUCCESS = 'ADD_LIST_SUCCESS'
-export const ADD_LIST_FAILURE = 'ADD_LIST_FAILURE'
+export const ADD_ITEM_POSTS = 'ADD_ITEM_POSTS'
+export const ADD_ITEM_SUCCESS = 'ADD_ITEM_SUCCESS'
+export const ADD_ITEM_FAILURE = 'ADD_ITEM_FAILURE'
+
+export const DELETE_ITEM_POSTS = 'DELETE_ITEM_POSTS'
+export const DELETE_ITEM_SUCCESS = 'DELETE_ITEM_SUCCESS'
+export const DELETE_ITEM_FAILURE = 'DELETE_ITEM_FAILURE'
 
 export const CHANGE_TODO_STATUS_POSTS = 'CHANGE_TODO_STATUS_POSTS'
 export const CHANGE_TODO_STATUS_SUCCESS = 'CHANGE_TODO_STATUS_SUCCESS'
@@ -16,27 +20,51 @@ export const CHANGE_TODO_STATUS_FAILURE = 'CHANGE_TODO_STATUS_FAILURE'
 /**
  * Action Creators
  */
-export const addListPosts = () => {
+// Add item to list
+export const addItemPosts = () => {
   return {
-    type: ADD_LIST_POSTS
+    type: ADD_ITEM_POSTS
   }
 }
 
-export const addListSuccess = data => {
+export const addItemSuccess = data => {
   return {
-    type: ADD_LIST_SUCCESS,
+    type: ADD_ITEM_SUCCESS,
     payload: {
       data
     }
   }
 }
 
-export const addListFailure = () => {
+export const addItemFailure = () => {
   return {
-    type: ADD_LIST_FAILURE
+    type: ADD_ITEM_FAILURE
   }
 }
 
+// Delete item from list
+export const deleteItemPosts = () => {
+  return {
+    type: DELETE_ITEM_POSTS
+  }
+}
+
+export const deleteItemSuccess = data => {
+  return {
+    type: DELETE_ITEM_SUCCESS,
+    payload: {
+      data
+    }
+  }
+}
+
+export const deleteItemFailure = () => {
+  return {
+    type: DELETE_ITEM_FAILURE
+  }
+}
+
+// Change item's status
 export const changeTodoStatusPosts = () => {
   return {
     type: CHANGE_TODO_STATUS_POSTS
@@ -63,11 +91,22 @@ export const changeTodoStatusFailure = () => {
  */
 export const addTodoList = (newTodo) => {
   return (dispatch) => {
-    dispatch(addListPosts())
+    dispatch(addItemPosts())
     try {
-      dispatch(addListSuccess(newTodo))
+      dispatch(addItemSuccess(newTodo))
     } catch (err) {
-      dispatch(addListFailure())
+      dispatch(addItemFailure())
+    }
+  }
+}
+
+export const deleteTodoList = (todo) => {
+  return (dispatch) => {
+    dispatch(deleteItemPosts())
+    try {
+      dispatch(deleteItemSuccess(todo))
+    } catch (err) {
+      dispatch(deleteItemFailure())
     }
   }
 }
@@ -87,8 +126,18 @@ export const changeTodoStatus = (todo) => {
  * Tools Methods
  */
 
+const deleteItemCallback = (todo, todoList) => {
+  let newTodoList = todoList.filter((item) => {
+    if (todo.id !== item.id) {
+      return item
+    }
+  })
+
+  return newTodoList
+}
+
 const changeItemStatus = (todo, todoList) => {
-  let newTodoList = todoList.map((item, index) => {
+  let newTodoList = todoList.map((item) => {
     if (todo.id === item.id) {
       return {
         ...item,
@@ -106,13 +155,13 @@ const changeItemStatus = (todo, todoList) => {
  */
 const TODO_APP_ACTION_HANDLERS = {
   // Add todo actions
-  [ADD_LIST_POSTS]: (state) => {
+  [ADD_ITEM_POSTS]: (state) => {
     return ({
       ...state,
       isLoading: true
     })
   },
-  [ADD_LIST_SUCCESS]: (state, action) => {
+  [ADD_ITEM_SUCCESS]: (state, action) => {
     // console.log(state)
     // console.log(action)
     return ({
@@ -121,7 +170,29 @@ const TODO_APP_ACTION_HANDLERS = {
       isLoading: false
     })
   },
-  [ADD_LIST_FAILURE]: (state) => {
+  [ADD_ITEM_FAILURE]: (state) => {
+    return ({
+      ...state,
+      isLoading: false
+    })
+  },
+  // Delete todo actions
+  [DELETE_ITEM_POSTS]: (state) => {
+    return ({
+      ...state,
+      isLoading: true
+    })
+  },
+  [DELETE_ITEM_SUCCESS]: (state, action) => {
+    // console.log(state)
+    // console.log(action)
+    return ({
+      ...state,
+      todos: deleteItemCallback(action.payload.data, state.todos),
+      isLoading: false
+    })
+  },
+  [DELETE_ITEM_FAILURE]: (state) => {
     return ({
       ...state,
       isLoading: false

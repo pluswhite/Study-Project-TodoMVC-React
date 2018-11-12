@@ -1,6 +1,7 @@
 import { connect } from 'react-redux'
 import {
   addTodoList,
+  deleteTodoList,
   changeTodoStatus
 } from '../modules/todoApp'
 
@@ -13,6 +14,7 @@ const mapStateToProps = state => ({
 
 const mapActionCreators = {
   addTodoList,
+  deleteTodoList,
   changeTodoStatus
 }
 

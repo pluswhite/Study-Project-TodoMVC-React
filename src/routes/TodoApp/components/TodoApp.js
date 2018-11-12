@@ -11,6 +11,7 @@ class TodoApp extends Component {
     todos: propTypes.array.isRequired,
     visibilityFilter: propTypes.string,
     addTodoList: propTypes.func,
+    deleteTodoList: propTypes.func,
     changeTodoStatus: propTypes.func
   }
 
@@ -58,12 +59,16 @@ class TodoApp extends Component {
   }
 
   render () {
-    const { todos, changeTodoStatus } = this.props
+    const {
+      todos,
+      deleteTodoList,
+      changeTodoStatus
+    } = this.props
     const { newTodo } = this.state
 
     let todoShowList = todos.map((item, index) => {
       return (
-        <TodoItem todo={item} key={item.id} onToggleStatus={changeTodoStatus} />
+        <TodoItem todo={item} key={item.id} onDeleteItem={deleteTodoList} onToggleStatus={changeTodoStatus} />
       )
     })
 
