@@ -37,8 +37,29 @@ export const addListFailure = () => {
   }
 }
 
+export const changeTodoStatusPosts = () => {
+  return {
+    type: CHANGE_TODO_STATUS_POSTS
+  }
+}
+
+export const changeTodoStatusSuccess = (data) => {
+  return {
+    type: CHANGE_TODO_STATUS_SUCCESS,
+    payload: {
+      data
+    }
+  }
+}
+
+export const changeTodoStatusFailure = () => {
+  return {
+    type: CHANGE_TODO_STATUS_FAILURE
+  }
+}
+
 /**
- * Tools Methods
+ * Action Methods
  */
 export const addTodoList = (newTodo) => {
   return (dispatch) => {
@@ -51,10 +72,40 @@ export const addTodoList = (newTodo) => {
   }
 }
 
+export const changeTodoStatus = (todo) => {
+  return (dispatch) => {
+    dispatch(changeTodoStatusPosts())
+    try {
+      dispatch(changeTodoStatusSuccess(todo))
+    } catch (err) {
+      dispatch(changeTodoStatusFailure())
+    }
+  }
+}
+
+/**
+ * Tools Methods
+ */
+
+const changeItemStatus = (todo, todoList) => {
+  let newTodoList = todoList.map((item, index) => {
+    if (todo.id === item.id) {
+      return {
+        ...item,
+        completed: !todo.completed
+      }
+    }
+    return item
+  })
+
+  return newTodoList
+}
+
 /**
  * Action Handlers
  */
 const TODO_APP_ACTION_HANDLERS = {
+  // Add todo actions
   [ADD_LIST_POSTS]: (state) => {
     return ({
       ...state,
@@ -76,6 +127,26 @@ const TODO_APP_ACTION_HANDLERS = {
       isLoading: false
     })
   },
+  // Change todo status actions
+  [CHANGE_TODO_STATUS_POSTS]: (state) => {
+    return ({
+      ...state,
+      isLoading: true
+    })
+  },
+  [CHANGE_TODO_STATUS_SUCCESS]: (state, action) => {
+    return ({
+      ...state,
+      todos: changeItemStatus(action.payload.data, state.todos),
+      isLoading: false
+    })
+  },
+  [CHANGE_TODO_STATUS_FAILURE]: (state) => {
+    return ({
+      ...state,
+      isLoading: false
+    })
+  }
 }
 
 /**

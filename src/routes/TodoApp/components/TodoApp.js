@@ -10,7 +10,8 @@ class TodoApp extends Component {
   static propTypes = {
     todos: propTypes.array.isRequired,
     visibilityFilter: propTypes.string,
-    addTodoList: propTypes.func
+    addTodoList: propTypes.func,
+    changeTodoStatus: propTypes.func
   }
 
   constructor (props) {
@@ -57,12 +58,12 @@ class TodoApp extends Component {
   }
 
   render () {
-    const { todos } = this.props
+    const { todos, changeTodoStatus } = this.props
     const { newTodo } = this.state
 
     let todoShowList = todos.map((item, index) => {
       return (
-        <TodoItem todo={item} key={item.id} />
+        <TodoItem todo={item} key={item.id} onToggleStatus={changeTodoStatus} />
       )
     })
 

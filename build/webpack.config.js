@@ -15,7 +15,7 @@ const __DEV__ = project.env === 'development' || project.env === 'predev'
 const __TEST__ = project.env === 'test'
 const __PROD__ = project.env === 'production' || project.env === 'pretest'
 
-const pkg = require('../package.json')
+// const pkg = require('../package.json')
 
 // let theme = {}
 
@@ -322,10 +322,10 @@ if (!__TEST__) {
 // ------------------------------------
 if (__PROD__) {
   config.plugins.push(
-    new SetVersion({
-      version: project.globals.PROJECT_BUILD_VERSION,
-      versionDirectory: inProject('public')
-    }),
+    // new SetVersion({
+    //   version: project.globals.PROJECT_BUILD_VERSION,
+    //   versionDirectory: inProject('public')
+    // }),
     new webpack.LoaderOptionsPlugin({
       minimize: true,
       debug: false
