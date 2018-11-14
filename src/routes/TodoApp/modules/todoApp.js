@@ -21,6 +21,10 @@ export const CHANGE_ALL_STATUS_POSTS = 'CHANGE_ALL_STATUS_POSTS'
 export const CHANGE_ALL_STATUS_SUCCESS = 'CHANGE_ALL_STATUS_SUCCESS'
 export const CHANGE_ALL_STATUS_FAILURE = 'CHANGE_ALL_STATUS_FAILURE'
 
+export const FILTER_TODO_LIST_POSTS = 'FILTER_TODO_LIST_POSTS'
+export const FILTER_TODO_LIST_SUCCESS = 'FILTER_TODO_LIST_SUCCESS'
+export const FILTER_TODO_LIST_FAILURE = 'FILTER_TODO_LIST_FAILURE'
+
 /**
  * Action Creators
  */
@@ -112,6 +116,28 @@ export const changeAllStatusFailure = () => {
   }
 }
 
+// Filter todo list
+export const filterAllTodoPosts = () => {
+  return {
+    type: FILTER_TODO_LIST_POSTS
+  }
+}
+
+export const filterAllTodoSuccess = (data) => {
+  return {
+    type: FILTER_TODO_LIST_SUCCESS,
+    payload: {
+      data
+    }
+  }
+}
+
+export const filterAllTodoFailure = () => {
+  return {
+    type: FILTER_TODO_LIST_FAILURE
+  }
+}
+
 /**
  * Action Methods
  */
@@ -155,6 +181,17 @@ export const changeAllStatus = (status) => {
       dispatch(changeAllStatusSuccess(status))
     } catch (err) {
       dispatch(changeAllStatusFailure())
+    }
+  }
+}
+
+export const filterTodoList = (filter) => {
+  return (dispatch) => {
+    dispatch(filterAllTodoPosts())
+    try {
+      dispatch(filterAllTodoSuccess(filter))
+    } catch (err) {
+      dispatch(filterAllTodoFailure())
     }
   }
 }
@@ -281,6 +318,25 @@ const TODO_APP_ACTION_HANDLERS = {
     })
   },
   [CHANGE_ALL_STATUS_FAILURE]: (state) => {
+    return ({
+      ...state,
+      isLoading: false
+    })
+  },
+  [FILTER_TODO_LIST_POSTS]: (state) => {
+    return ({
+      ...state,
+      isLoading: true
+    })
+  },
+  [FILTER_TODO_LIST_SUCCESS]: (state, action) => {
+    return ({
+      ...state,
+      visibilityFilter: action.payload.data,
+      isLoading: false
+    })
+  },
+  [FILTER_TODO_LIST_FAILURE]: (state) => {
     return ({
       ...state,
       isLoading: false

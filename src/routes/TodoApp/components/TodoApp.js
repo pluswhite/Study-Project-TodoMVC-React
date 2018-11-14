@@ -13,7 +13,8 @@ class TodoApp extends Component {
     addTodoList: propTypes.func,
     deleteTodoList: propTypes.func,
     changeTodoStatus: propTypes.func,
-    changeAllStatus: propTypes.func
+    changeAllStatus: propTypes.func,
+    filterTodoList: propTypes.func
   }
 
   constructor (props) {
@@ -68,17 +69,32 @@ class TodoApp extends Component {
     const {
       todos,
       deleteTodoList,
-      changeTodoStatus
+      changeTodoStatus,
+      filterTodoList,
+      visibilityFilter
     } = this.props
     const { newTodo } = this.state
 
     let completedTodoCount = 0
     let todoCount = todos.length
 
-    let todoShowList = todos.map((item, index) => {
+    let todoShowList = todos.filter((item) => {
       if (item.completed) {
         completedTodoCount++
       }
+      switch (visibilityFilter) {
+        case 'SHOW_ALL':
+          return item
+        case 'ACTIVE':
+          return !item.completed
+        case 'COMPLETED':
+          return item.completed
+        default:
+          return item
+      }
+    })
+
+    let todoItems = todoShowList.map((item, index) => {
       return (
         <TodoItem todo={item} key={item.id} onDeleteItem={deleteTodoList} onToggleStatus={changeTodoStatus} />
       )
@@ -94,10 +110,10 @@ class TodoApp extends Component {
           <input onChange={this.handleToggleAll} id='toggle-all' className='toggle-all' type='checkbox' checked={completedTodoCount === todoCount} />
           <label htmlFor='toggle-all'>Mark all as complete</label>
           <ul className='todo-list'>
-            {todoShowList}
+            {todoItems}
           </ul>
         </section>
-        <Footer leftItemCount={todoCount - completedTodoCount} />
+        <Footer leftItemCount={todoCount - completedTodoCount} filterTodoList={filterTodoList} />
       </section>
     )
   }

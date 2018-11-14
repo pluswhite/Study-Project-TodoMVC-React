@@ -3,7 +3,8 @@ import {
   addTodoList,
   deleteTodoList,
   changeTodoStatus,
-  changeAllStatus
+  changeAllStatus,
+  filterTodoList
 } from '../modules/todoApp'
 
 import HomeView from '../components/TodoApp'
@@ -17,7 +18,8 @@ const mapActionCreators = {
   addTodoList,
   deleteTodoList,
   changeTodoStatus,
-  changeAllStatus
+  changeAllStatus,
+  filterTodoList
 }
 
 export default connect(mapStateToProps, mapActionCreators)(HomeView)
