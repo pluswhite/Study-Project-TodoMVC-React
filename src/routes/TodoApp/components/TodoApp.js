@@ -12,7 +12,8 @@ class TodoApp extends Component {
     visibilityFilter: propTypes.string,
     addTodoList: propTypes.func,
     deleteTodoList: propTypes.func,
-    changeTodoStatus: propTypes.func
+    changeTodoStatus: propTypes.func,
+    changeAllStatus: propTypes.func
   }
 
   constructor (props) {
@@ -58,6 +59,11 @@ class TodoApp extends Component {
     }
   }
 
+  handleToggleAll = (evt) => {
+    const { changeAllStatus } = this.props
+    changeAllStatus(evt.target.checked)
+  }
+
   render () {
     const {
       todos,
@@ -66,7 +72,13 @@ class TodoApp extends Component {
     } = this.props
     const { newTodo } = this.state
 
+    let completedTodoCount = 0
+    let todoCount = todos.length
+
     let todoShowList = todos.map((item, index) => {
+      if (item.completed) {
+        completedTodoCount++
+      }
       return (
         <TodoItem todo={item} key={item.id} onDeleteItem={deleteTodoList} onToggleStatus={changeTodoStatus} />
       )
@@ -79,60 +91,13 @@ class TodoApp extends Component {
           <input onChange={this.handleNewTodoChange} onKeyDown={this.handledNewTodo} value={newTodo} className='new-todo' placeholder='What needs to be done?' autoFocus />
         </header>
         <section className='main'>
-          <input id='toggle-all' className='toggle-all' type='checkbox' />
+          <input onChange={this.handleToggleAll} id='toggle-all' className='toggle-all' type='checkbox' checked={completedTodoCount === todoCount} />
           <label htmlFor='toggle-all'>Mark all as complete</label>
           <ul className='todo-list'>
             {todoShowList}
-            {/* <li className='completed'>
-              <div className='view'>
-                <input className='toggle' type='checkbox' checked />
-                <label>Taste JavaScript</label>
-                <button className='destroy' />
-              </div>
-              <input className='edit' value='Create a TodoMVC template' />
-            </li>
-            <li>
-              <div className='view'>
-                <input className='toggle' type='checkbox' />
-                <label>Buy a unicorn</label>
-                <button className='destroy' />
-              </div>
-              <input className='edit' value='Rule the web' />
-            </li>
-            <li>
-              <div className='view'>
-                <input className='toggle' type='checkbox' />
-                <label>Buy a unicorn</label>
-                <button className='destroy' />
-              </div>
-              <input className='edit' value='Rule the web' />
-            </li>
-            <li>
-              <div className='view'>
-                <input className='toggle' type='checkbox' />
-                <label>Buy a unicorn</label>
-                <button className='destroy' />
-              </div>
-              <input className='edit' value='Rule the web' />
-            </li> */}
           </ul>
         </section>
-        <Footer />
-        {/* <footer className='footer'>
-          <span className='todo-count'><strong>0</strong> item left</span>
-          <ul className='filters'>
-            <li>
-              <a className='selected' href='#/'>All</a>
-            </li>
-            <li>
-              <a href='#/active'>Active</a>
-            </li>
-            <li>
-              <a href='#/completed'>Completed</a>
-            </li>
-          </ul>
-          <button className='clear-completed'>Clear completed</button>
-        </footer> */}
+        <Footer leftItemCount={todoCount - completedTodoCount} />
       </section>
     )
   }

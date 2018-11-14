@@ -2,7 +2,8 @@ import { connect } from 'react-redux'
 import {
   addTodoList,
   deleteTodoList,
-  changeTodoStatus
+  changeTodoStatus,
+  changeAllStatus
 } from '../modules/todoApp'
 
 import HomeView from '../components/TodoApp'
@@ -15,7 +16,8 @@ const mapStateToProps = state => ({
 const mapActionCreators = {
   addTodoList,
   deleteTodoList,
-  changeTodoStatus
+  changeTodoStatus,
+  changeAllStatus
 }
 
 export default connect(mapStateToProps, mapActionCreators)(HomeView)

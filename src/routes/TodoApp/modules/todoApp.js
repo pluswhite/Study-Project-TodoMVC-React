@@ -17,6 +17,10 @@ export const CHANGE_TODO_STATUS_POSTS = 'CHANGE_TODO_STATUS_POSTS'
 export const CHANGE_TODO_STATUS_SUCCESS = 'CHANGE_TODO_STATUS_SUCCESS'
 export const CHANGE_TODO_STATUS_FAILURE = 'CHANGE_TODO_STATUS_FAILURE'
 
+export const CHANGE_ALL_STATUS_POSTS = 'CHANGE_ALL_STATUS_POSTS'
+export const CHANGE_ALL_STATUS_SUCCESS = 'CHANGE_ALL_STATUS_SUCCESS'
+export const CHANGE_ALL_STATUS_FAILURE = 'CHANGE_ALL_STATUS_FAILURE'
+
 /**
  * Action Creators
  */
@@ -86,6 +90,28 @@ export const changeTodoStatusFailure = () => {
   }
 }
 
+// Change all item's status
+export const changeAllStatusPosts = () => {
+  return {
+    type: CHANGE_ALL_STATUS_POSTS
+  }
+}
+
+export const changeAllStatusSuccess = (data) => {
+  return {
+    type: CHANGE_ALL_STATUS_SUCCESS,
+    payload: {
+      data
+    }
+  }
+}
+
+export const changeAllStatusFailure = () => {
+  return {
+    type: CHANGE_ALL_STATUS_FAILURE
+  }
+}
+
 /**
  * Action Methods
  */
@@ -122,6 +148,17 @@ export const changeTodoStatus = (todo) => {
   }
 }
 
+export const changeAllStatus = (status) => {
+  return (dispatch) => {
+    dispatch(changeAllStatusPosts())
+    try {
+      dispatch(changeAllStatusSuccess(status))
+    } catch (err) {
+      dispatch(changeAllStatusFailure())
+    }
+  }
+}
+
 /**
  * Tools Methods
  */
@@ -145,6 +182,17 @@ const changeItemStatus = (todo, todoList) => {
       }
     }
     return item
+  })
+
+  return newTodoList
+}
+
+const changeAllItemsStatus = (status, todoList) => {
+  let newTodoList = todoList.map((item) => {
+    return {
+      ...item,
+      completed: status
+    }
   })
 
   return newTodoList
@@ -217,7 +265,27 @@ const TODO_APP_ACTION_HANDLERS = {
       ...state,
       isLoading: false
     })
-  }
+  },
+  // Change all todos status actions
+  [CHANGE_ALL_STATUS_POSTS]: (state) => {
+    return ({
+      ...state,
+      isLoading: true
+    })
+  },
+  [CHANGE_ALL_STATUS_SUCCESS]: (state, action) => {
+    return ({
+      ...state,
+      todos: changeAllItemsStatus(action.payload.data, state.todos),
+      isLoading: false
+    })
+  },
+  [CHANGE_ALL_STATUS_FAILURE]: (state) => {
+    return ({
+      ...state,
+      isLoading: false
+    })
+  },
 }
 
 /**
