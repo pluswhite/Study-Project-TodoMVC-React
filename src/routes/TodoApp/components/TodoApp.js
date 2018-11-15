@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import propTypes from 'prop-types'
+import PropTypes from 'prop-types'
 // import './TodoApp.scss'
 import TodoItem from 'vcms/TodoItem'
 import Footer from 'vcms/Footer'
@@ -8,13 +8,14 @@ const ENTER_KEY = 13
 
 class TodoApp extends Component {
   static propTypes = {
-    todos: propTypes.array.isRequired,
-    visibilityFilter: propTypes.string,
-    addTodoList: propTypes.func,
-    deleteTodoList: propTypes.func,
-    changeTodoStatus: propTypes.func,
-    changeAllStatus: propTypes.func,
-    filterTodoList: propTypes.func
+    todos: PropTypes.array.isRequired,
+    visibilityFilter: PropTypes.string,
+    addTodoList: PropTypes.func,
+    deleteTodoList: PropTypes.func,
+    changeTodoStatus: PropTypes.func,
+    changeAllStatus: PropTypes.func,
+    filterTodoList: PropTypes.func,
+    clearAllCompleted: PropTypes.func
   }
 
   constructor (props) {
@@ -71,6 +72,7 @@ class TodoApp extends Component {
       deleteTodoList,
       changeTodoStatus,
       filterTodoList,
+      clearAllCompleted,
       visibilityFilter
     } = this.props
     const { newTodo } = this.state
@@ -113,7 +115,7 @@ class TodoApp extends Component {
             {todoItems}
           </ul>
         </section>
-        <Footer leftItemCount={todoCount - completedTodoCount} filterTodoList={filterTodoList} />
+        <Footer leftItemCount={todoCount - completedTodoCount} filterTodoList={filterTodoList} clearAllCompleted={clearAllCompleted} />
       </section>
     )
   }

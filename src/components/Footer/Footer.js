@@ -4,7 +4,8 @@ import PropTypes from 'prop-types'
 export default class Footer extends Component {
   static propTypes = {
     leftItemCount: PropTypes.number,
-    filterTodoList: PropTypes.func
+    filterTodoList: PropTypes.func,
+    clearAllCompleted: PropTypes.func
   }
 
   constructor (props) {
@@ -23,7 +24,7 @@ export default class Footer extends Component {
   }
 
   render () {
-    const { leftItemCount } = this.props
+    const { leftItemCount, clearAllCompleted } = this.props
     const { active } = this.state
 
     return (
@@ -40,7 +41,7 @@ export default class Footer extends Component {
             <a className={active === 'COMPLETED' ? 'selected' : ''} href='#/completed' onClick={(evt) => this.handleListFiler('COMPLETED', evt)}>Completed</a>
           </li>
         </ul>
-        <button className='clear-completed'>Clear completed</button>
+        <button className='clear-completed' onClick={clearAllCompleted}>Clear completed</button>
       </footer>
     )
   }

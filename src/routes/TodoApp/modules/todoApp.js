@@ -25,6 +25,10 @@ export const FILTER_TODO_LIST_POSTS = 'FILTER_TODO_LIST_POSTS'
 export const FILTER_TODO_LIST_SUCCESS = 'FILTER_TODO_LIST_SUCCESS'
 export const FILTER_TODO_LIST_FAILURE = 'FILTER_TODO_LIST_FAILURE'
 
+export const CLEAR_ALL_COMPLETED_POSTS = 'CLEAR_ALL_COMPLETED_POSTS'
+export const CLEAR_ALL_COMPLETED_SUCCESS = 'CLEAR_ALL_COMPLETED_SUCCESS'
+export const CLEAR_ALL_COMPLETED_FAILURE = 'CLEAR_ALL_COMPLETED_FAILURE'
+
 /**
  * Action Creators
  */
@@ -138,6 +142,28 @@ export const filterAllTodoFailure = () => {
   }
 }
 
+// Clear all completed todo
+export const clearAllCompletedPosts = () => {
+  return {
+    type: CLEAR_ALL_COMPLETED_POSTS
+  }
+}
+
+export const clearAllCompletedSuccess = (data) => {
+  return {
+    type: CLEAR_ALL_COMPLETED_SUCCESS,
+    payload: {
+      data
+    }
+  }
+}
+
+export const clearAllCompletedFailure = () => {
+  return {
+    type: CLEAR_ALL_COMPLETED_FAILURE
+  }
+}
+
 /**
  * Action Methods
  */
@@ -196,6 +222,17 @@ export const filterTodoList = (filter) => {
   }
 }
 
+export const clearAllCompleted = () => {
+  return (dispatch) => {
+    dispatch(clearAllCompletedPosts())
+    try {
+      dispatch(clearAllCompletedSuccess())
+    } catch (err) {
+      dispatch(clearAllCompletedFailure())
+    }
+  }
+}
+
 /**
  * Tools Methods
  */
@@ -229,6 +266,16 @@ const changeAllItemsStatus = (status, todoList) => {
     return {
       ...item,
       completed: status
+    }
+  })
+
+  return newTodoList
+}
+
+const clearAllCompletedCallback = (todoList) => {
+  let newTodoList = todoList.filter(item => {
+    if (!item.completed) {
+      return item
     }
   })
 
@@ -337,6 +384,25 @@ const TODO_APP_ACTION_HANDLERS = {
     })
   },
   [FILTER_TODO_LIST_FAILURE]: (state) => {
+    return ({
+      ...state,
+      isLoading: false
+    })
+  },
+  [CLEAR_ALL_COMPLETED_POSTS]: (state) => {
+    return ({
+      ...state,
+      isLoading: true
+    })
+  },
+  [CLEAR_ALL_COMPLETED_SUCCESS]: (state) => {
+    return ({
+      ...state,
+      todos: clearAllCompletedCallback(state.todos),
+      isLoading: false
+    })
+  },
+  [CLEAR_ALL_COMPLETED_FAILURE]: (state) => {
     return ({
       ...state,
       isLoading: false
