@@ -1,0 +1,252 @@
+/**
+ * variables
+ */
+
+/**
+ * Colors
+ */
+
+// base color
+// red
+$rx-color-red-1: #fff0e6 !default;
+$rx-color-red-2: #fff0e6 !default;
+$rx-color-red-3: #ffa97a !default;
+$rx-color-red-4: #ff8952 !default;
+$rx-color-red-5: #fc6428 !default;
+$rx-color-red-6: #f03c00 !default;
+$rx-color-red-7: #c92c00 !default;
+$rx-color-red-8: #a31e00 !default;
+$rx-color-red-9: #7d1300 !default;
+$rx-color-red-10: #7d1300 !default;
+
+// yellow
+$rx-color-yellow-1: #fff7e6 !default;
+$rx-color-yellow-2: #ffe0a3 !default;
+$rx-color-yellow-3: #ffce7a !default;
+$rx-color-yellow-4: #ffba52 !default;
+$rx-color-yellow-5: #ffba52 !default;
+$rx-color-yellow-6: #ff8600 !default;
+$rx-color-yellow-7: #d96c00 !default;
+$rx-color-yellow-8: #d96c00 !default;
+$rx-color-yellow-9: #8c3d00 !default;
+$rx-color-yellow-10: #662900 !default;
+
+// green
+$rx-color-green-1: #e6ffeb !default;
+$rx-color-green-2: #9df5b3 !default;
+$rx-color-green-3: #9df5b3 !default;
+$rx-color-green-4: #46db75 !default;
+$rx-color-green-5: #21cf5e !default;
+$rx-color-green-6: #00c249 !default;
+$rx-color-green-7: #009c41 !default;
+$rx-color-green-8: #007535 !default;
+$rx-color-green-9: #004f26 !default;
+$rx-color-green-10: #002915 !default;
+
+// cyan
+$rx-color-cyan-1: #edfffd !default;
+$rx-color-cyan-2: #c4fff9 !default;
+$rx-color-cyan-3: #9afcf6 !default;
+$rx-color-cyan-4: #6cf0eb !default;
+$rx-color-cyan-5: #42e3e3 !default;
+$rx-color-cyan-6: #1dd1d7 !default;
+$rx-color-cyan-7: #0ea5b0 !default;
+$rx-color-cyan-8: #047c8a !default;
+$rx-color-cyan-9: #005663 !default;
+$rx-color-cyan-10: #00333d !default;
+// blue
+$rx-color-blue-1: #e6f8ff !default;
+$rx-color-blue-2: #a8e5ff !default;
+$rx-color-blue-3: #7ccef7 !default;
+$rx-color-blue-4: #50b2eb !default;
+$rx-color-blue-5: #2895d1 !default;
+$rx-color-blue-6: #0479d2 !default;
+$rx-color-blue-7: #005bab !default;
+$rx-color-blue-8: #004285 !default;
+$rx-color-blue-9: #002c5e !default;
+$rx-color-blue-10: #001838 !default;
+
+// purple
+$rx-color-purple-1: #f2dae6 !default;
+$rx-color-purple-2: #e695c0 !default;
+$rx-color-purple-3: #d96aa9 !default;
+$rx-color-purple-4: #cc4395 !default;
+$rx-color-purple-5: #bf2185 !default;
+$rx-color-purple-6: #b30177 !default;
+$rx-color-purple-7: #8c0062 !default;
+$rx-color-purple-8: #66004b !default;
+$rx-color-purple-9: #400031 !default;
+$rx-color-purple-10: #1a0014 !default;
+
+// neutral color
+$rx-color-gray-0: #fff !default;
+$rx-color-gray-1: #fafafa !default;
+$rx-color-gray-2: #f5f5f5 !default;
+$rx-color-gray-3: #f0f0f0 !default;
+$rx-color-gray-4: #d9d9d9 !default;
+$rx-color-gray-5: #bfbfbf !default;
+$rx-color-gray-6: #8c8c8c !default;
+$rx-color-gray-7: #828282 !default;
+$rx-color-gray-8: #5c5c5c !default;
+$rx-color-gray-9: #595959 !default;
+$rx-color-gray-10: #262626 !default;
+$rx-color-gray-11: #1f1f1f !default;
+$rx-color-gray-12: #141414 !default;
+$rx-color-gray-13: #000 !default;
+
+$rx-color-red: $rx-color-red-6 !default;
+$rx-color-yellow: $rx-color-yellow-6 !default;
+$rx-color-orange: $rx-color-yellow-8 !default;
+$rx-color-green: $rx-color-green-6 !default;
+$rx-color-cyan: $rx-color-cyan-6 !default;
+$rx-color-blue: $rx-color-blue-6 !default;
+$rx-color-purple: $rx-color-purple-6 !default;
+$rx-color-pink: $rx-color-purple-3 !default;
+$rx-color-white: $rx-color-gray-0 !default;
+$rx-color-gray: $rx-color-gray-6 !default;
+$rx-color-black: $rx-color-gray-13 !default;
+$rx-color-teal: #16a9a1 !default;
+
+// system color
+$rx-primary: $rx-color-blue-6 !default;
+$rx-secondary: $rx-color-blue-4 !default;
+$rx-success: $rx-color-green-6 !default;
+$rx-info: $rx-color-blue-5 !default;
+$rx-warning: $rx-color-yellow-6 !default;
+$rx-danger: $rx-color-red-6 !default;
+$rx-link: $rx-color-blue-7 !default;
+$rx-light: $rx-color-gray-1 !default;
+$rx-gray: $rx-color-gray-6 !default;
+$rx-white: $rx-color-white !default;
+$rx-black: $rx-color-black !default;
+
+// primary gradient
+$rx-primary-lighter: $rx-color-blue-3 !default;
+$rx-primary-light: $rx-color-blue-5 !default;
+$rx-primary-dark: $rx-color-blue-7 !default;
+$rx-primary-darker: $rx-color-blue-9 !default;
+
+// success gradient
+$rx-success-lighter: $rx-color-green-3 !default;
+$rx-success-light: $rx-color-green-5 !default;
+$rx-success-dark: $rx-color-green-7 !default;
+$rx-success-darker: $rx-color-green-9 !default;
+
+// info gradient
+$rx-info-lighter: $rx-color-blue-3 !default;
+$rx-info-light: $rx-color-blue-5 !default;
+$rx-info-dark: $rx-color-blue-8 !default;
+$rx-info-darker: $rx-color-blue-10 !default;
+
+// warning gradient
+$rx-warning-lighter: $rx-color-yellow-3 !default;
+$rx-warning-light: $rx-color-yellow-5 !default;
+$rx-warning-dark: $rx-color-yellow-7 !default;
+$rx-warning-darker: $rx-color-yellow-9 !default;
+
+// danger gradient
+$rx-danger-lighter: $rx-color-red-3 !default;
+$rx-danger-light: $rx-color-red-5 !default;
+$rx-danger-dark: $rx-color-red-7 !default;
+$rx-danger-darker: $rx-color-red-9 !default;
+
+$rx-colors: (primary, success, warning, danger, info, light, dark);
+
+$rx-theme-colors: (
+  'primary': $rx-primary,
+  'secondary': $rx-secondary,
+  'success': $rx-success,
+  'info': $rx-info,
+  'warning': $rx-warning,
+  'danger': $rx-danger,
+  'light': $rx-light,
+  'dark': $rx-gray,
+);
+
+/**
+ * Text
+ */
+
+// text color
+$rx-text-color-base: $rx-color-gray-12 !default;
+$rx-text-color-primary: $rx-color-gray-12 !default;
+$rx-text-color-secondary: $rx-color-gray-10 !default;
+$rx-text-color-regular: $rx-color-gray-8 !default;
+$rx-text-color-placeholder: $rx-color-gray-5 !default;
+
+/**
+ * Border
+ */
+// border color
+$rx-border-color-base: $rx-color-gray !default;
+$rx-border-color-light: $rx-color-gray-5 !default;
+$rx-border-color-lighter: $rx-color-gray-3 !default;
+$rx-border-color-extra-light: $rx-color-gray-1 !default;
+
+$rx-border-width-base: 1px !default;
+$rx-border-style-base: solid !default;
+$rx-border-color-hover: $rx-text-color-primary !default;
+$rx-border-base: $rx-border-width-base $rx-border-style-base $rx-border-color-base !default;
+
+// border radius
+$rx-border-radius-base: 4px !default;
+$rx-border-radius-small: 2px !default;
+$rx-border-radius-circle: 100% !default;
+$rx-border-radius-zero: 0 !default;
+
+/**
+ * Background
+ */
+// background color
+$rx-background-color-base: $rx-color-gray-0;
+$rx-background-color-light: $rx-color-gray-2 !default;
+$rx-background-color-dark: $rx-color-gray-3 !default;
+
+/**
+ * Typography
+ */
+$rx-font-size-extra-small: 12px !default;
+$rx-font-size-small: 13px !default;
+$rx-font-size-base: 14px !default;
+$rx-font-size-medium: 16px !default;
+$rx-font-size-large: 18px !default;
+$rx-font-size-extra-large: 20px !default;
+
+$rx-font-weight-primary: 700 !default;
+$rx-font-weight-secondary: 500 !default;
+
+$rx-font-color-disabled-base: $rx-color-gray-5 !default;
+
+/**
+ * Disabled base
+ */
+$rx-disabled-fill-base: $rx-background-color-dark !default;
+$rx-disabled-color-base: $rx-color-gray-5 !default;
+$rx-disabled-border-base: $rx-border-color-light !default;
+
+/**
+ * Line height
+ */
+// line height
+$rx-font-line-height-primary: 1.5 !default;
+$rx-font-line-height-secondary: 1.3 !default;
+
+/**
+ * Box shadow
+ */
+// box shadow
+$rx-box-shadow-base: 0 2px 4px rgba(0, 0, 0, 0.12), 0 0 6px rgba(0, 0, 0, 0.04) !default;
+$rx-box-shadow-dark: 0 2px 4px rgba(0, 0, 0, 0.12), 0 0 6px rgba(0, 0, 0, 0.12) !default;
+$rx-box-shadow-light: 0 2px 12px rgba(0, 0, 0, 0.1) !default;
+
+/**
+ * Spacing
+ */
+// spacing
+$rx-spacing-extra-small: 1.2rem !default;
+$rx-spacing-small: 1.6 !default;
+$rx-spacing-medium: 2rem !default;
+$rx-spacing-large: 2.4rem !default;
+$rx-spacing-extra-large: 3.2rem !default;
+$rx-spacing-base: 2.4rem !default;
+$rx-spacing-clear: 0 !default;

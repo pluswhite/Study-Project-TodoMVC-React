@@ -1,0 +1,63 @@
+@import './styles/index.scss';
+
+.sbdocs.sbdocs-h1 {
+  margin-bottom: 30px;
+}
+
+.sbdocs.sbdocs-h2 {
+  margin-bottom: 25px;
+}
+
+.sbdocs.sbdocs-h3 {
+  margin-bottom: 20px;
+}
+
+.demo-icon {
+  margin: 15px;
+}
+
+.demo-button.rx-button {
+  margin: 15px;
+}
+
+.demo-tag {
+  margin: 15px;
+}
+
+.demo-row {
+  margin-bottom: 15px;
+  // background-color: $rx-color-gray-2;
+
+  &--item {
+    padding: 15px 0;
+    background-color: $rx-color-blue-6;
+    border-radius: 4px;
+  }
+
+  :nth-child(2n + 1) {
+    & > {
+      background-color: $rx-color-blue-6;
+    }
+  }
+
+  :nth-child(2n) {
+    & > {
+      background-color: $rx-color-blue-4;
+    }
+  }
+
+  :nth-child(n) {
+    color: $rx-white;
+    text-align: center;
+  }
+}
+
+.demo-alert {
+  & + .demo-alert {
+    margin-top: 20px;
+  }
+}
+
+.demo-switch {
+  margin-right: 15px;
+}

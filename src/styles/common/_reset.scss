@@ -1,0 +1,19 @@
+/**
+ * Reset.scss
+ **/
+@import '~normalize.css/normalize.css';
+@import './variables';
+
+html,
+body {
+  font-family: Roboto, Helvetica, 'PingFang SC', 'Microsoft YaHei', '微软雅黑', Arial, sans-serif;
+  font-size: $rx-font-size-base;
+  color: $rx-text-color-base;
+
+  --webkit-font-smoothing: antialiased;
+}
+
+p {
+  margin-top: 0;
+  margin-bottom: 0;
+}

@@ -1,0 +1,71 @@
+/**
+ * mixins
+ */
+
+@import 'functions';
+
+// CSS BEM naming
+@mixin bem($block) {
+  $block-name: $namespace + '-' + $block !global;
+
+  .#{$block-name} {
+    @content;
+  }
+}
+
+// BEM - element
+@mixin elm($element) {
+  $element-name: $element !global;
+  $selector: &;
+  $current-selector: '';
+
+  @each $unit in $element {
+    $current-selector: #{$current-selector +
+      '.' +
+      $element-name +
+      $element-separator +
+      $unit +
+      ','};
+  }
+
+  @if hit-all-special-nest-rule($selector) {
+    @at-root {
+      #{$selector} {
+        #{$current-selector} {
+          @content;
+        }
+      }
+    }
+  } @else {
+    @at-root {
+      #{$current-selector} {
+        @content;
+      }
+    }
+  }
+}
+
+// BEM - modifier
+@mixin mod($modifier) {
+  $selector: &;
+  $current-selector: '';
+
+  @each $unit in $modifier {
+    $current-selector: #{$current-selector + & + $modifier-separator + $unit + ','};
+  }
+
+  @at-root {
+    #{$current-selector} {
+      @content;
+    }
+  }
+}
+
+// CSS status `is-[status]`
+@mixin when($state) {
+  @at-root {
+    &.#{$state-prefix + $state} {
+      @content;
+    }
+  }
+}
