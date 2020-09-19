@@ -1,12 +1,24 @@
-import React, { FC, useReducer } from 'react';
+import React, { FC, useContext, useReducer } from 'react';
 import './App.scss';
 
 import { AppContext, initialState } from './hooks/appContexts';
 import { appReducer } from './reducers/appReducer';
 
-const Input: FC = () => <>Input</>;
+const Input: FC = () => {
+  const { state, dispatch } = useContext(AppContext);
+  return (
+    <div>
+      {state.newTodo}
+      Input
+    </div>
+  );
+};
+
 const TodoList: FC = () => <>TodoList</>;
-const Footer: FC = () => <>Footer</>;
+const Footer: FC = () => {
+  const { state, dispatch } = useContext(AppContext);
+  return <div>{state.visibility}</div>;
+};
 
 const AppProvider: React.FC = ({ children }) => {
   const [state, dispatch] = useReducer(appReducer, initialState);
