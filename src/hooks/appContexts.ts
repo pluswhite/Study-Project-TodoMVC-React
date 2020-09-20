@@ -3,19 +3,13 @@
  */
 
 import { createContext, Dispatch } from 'react';
+import { IAppState } from '../types';
 
 export enum VisibilityType {
   ALL = 'ALL',
   ACTIVE = 'ACTIVE',
   COMPLETED = 'COMPLETED',
 }
-
-export type IAppState = {
-  todos: string[];
-  newTodo: string;
-  editTodo: string;
-  visibility: VisibilityType;
-};
 
 export const initialState: IAppState = {
   todos: [],

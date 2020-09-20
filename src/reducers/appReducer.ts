@@ -2,7 +2,7 @@
  * App Reducer
  */
 
-import { IAppState } from '../hooks/appContexts';
+import { IAppState } from '../types';
 
 interface IActionType {
   type: Actions;

@@ -1,8 +1,9 @@
 import React, { FC, useContext, useReducer } from 'react';
-import './App.scss';
 
 import { AppContext, initialState } from './hooks/appContexts';
 import { appReducer } from './reducers/appReducer';
+
+import './App.scss';
 
 const Input: FC = () => {
   const { state, dispatch } = useContext(AppContext);
@@ -14,12 +15,20 @@ const Input: FC = () => {
   );
 };
 
-const TodoList: FC = () => <>TodoList</>;
+const TodoItem: FC = () => <div>Item</div>;
+
+const TodoList: FC = () => {
+  const { state, dispatch } = useContext(AppContext);
+  const { todos } = state;
+  return <>TodoList</>;
+};
+
 const Footer: FC = () => {
   const { state, dispatch } = useContext(AppContext);
   return <div>{state.visibility}</div>;
 };
 
+// AppProvider
 const AppProvider: React.FC = ({ children }) => {
   const [state, dispatch] = useReducer(appReducer, initialState);
 
