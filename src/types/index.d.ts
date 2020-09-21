@@ -20,19 +20,19 @@ export interface ITodoForm {
 // TodoList Interface
 export interface ITodoList {
   todos: ITodo[];
-  handleTodoUpdate: (event: ChangeEvent<HTMLInputElement>, id: string) => void;
-  handleTodoRemove: (id: string) => void;
-  handleTodoComplete: (id: string) => void;
-  handleTodoBlur: (event: ChangeEvent<HTMLInputElement>) => void;
+  handleTodoUpdate?: (event: ChangeEvent<HTMLInputElement>, id: string) => void;
+  handleTodoRemove?: (id: string) => void;
+  handleTodoComplete?: (id: string) => void;
+  handleTodoBlur?: (event: ChangeEvent<HTMLInputElement>) => void;
 }
 
 // TodoItem Interface
 export interface ITodoItem {
   todo: ITodo;
-  handleTodoUpdate: (event: ChangeEvent<HTMLInputElement>, id: string) => void;
-  handleTodoRemove: (id: string) => void;
-  handleTodoComplete: (id: string) => void;
-  handleTodoBlur: (event: ChangeEvent<HTMLInputElement>) => void;
+  handleTodoUpdate?: (event: ChangeEvent<HTMLInputElement>, id: string) => void;
+  handleTodoRemove?: (id: string) => void;
+  handleTodoComplete?: (id: string) => void;
+  handleTodoBlur?: (event: ChangeEvent<HTMLInputElement>) => void;
 }
 
 export type IAppState = {
