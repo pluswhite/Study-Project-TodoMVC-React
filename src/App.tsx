@@ -32,6 +32,7 @@ const Footer: FC = () => {
           </a>
         </li>
       </ul>
+      <button className="clear-completed">Clear completed</button>
     </footer>
   );
 };
