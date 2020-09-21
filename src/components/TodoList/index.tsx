@@ -1,3 +1,3 @@
-import TodoForm from './todoList';
+import TodoList from './todoList';
 
-export default TodoForm;
+export default TodoList;

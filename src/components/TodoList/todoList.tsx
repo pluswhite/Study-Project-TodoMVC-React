@@ -1,15 +1,22 @@
-import React, { FC } from 'react';
+import React, { FC, useContext } from 'react';
 
 import TodoItem from '../TodoItem';
-import { ITodoForm } from '../../types';
+import { ITodoList } from '../../types';
 import './todoList.scss';
+import { AppContext } from '../../hooks/appContexts';
 
-const TodoForm: FC<ITodoForm> = (props: ITodoForm) => {
-  const { todos, ...restProps } = props;
+const TodoList: FC<ITodoList> = (props: ITodoList) => {
+  const { state, dispatch } = useContext(AppContext);
+  const { todos } = state;
+  const { ...restProps } = props;
 
   return (
-    <div className="todo-list">
-      <ul>
+    <div className="main">
+      <input type="checkbox" id="toggle-all" className="toggle-all" />
+      <label htmlFor="" className="toggle-all">
+        Mark all as complete
+      </label>
+      <ul className="todo-list">
         {todos.map((todo) => (
           <li key={todo.id}>
             <TodoItem todo={todo} {...restProps} />
@@ -20,4 +27,4 @@ const TodoForm: FC<ITodoForm> = (props: ITodoForm) => {
   );
 };
 
-export default TodoForm;
+export default TodoList;

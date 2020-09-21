@@ -1,14 +1,30 @@
-import React, { ChangeEvent, KeyboardEvent, FC, useRef, useState } from 'react';
+import React, {
+  ChangeEvent,
+  KeyboardEvent,
+  FC,
+  useRef,
+  useState,
+  useContext,
+} from 'react';
 import shortid from 'shortid';
+import { AppContext } from '../../hooks/appContexts';
+import { Actions } from '../../reducers/appReducer';
 
 import { ITodo, ITodoForm } from '../../types';
-import './todoList.scss';
+import './todoForm.scss';
 
 const TodoForm: FC<ITodoForm> = (props: ITodoForm) => {
-  const { todos, handleTodoCreate } = props;
+  const { dispatch } = useContext(AppContext);
   const inputRef = useRef<HTMLInputElement>(null);
-
   const [formState, setFormState] = useState('');
+
+  const handleTodoCreate = (todo: ITodo) => {
+    console.log(todo);
+    dispatch({
+      type: Actions.CREATE_ITEM,
+      payload: todo,
+    });
+  };
 
   const handleInputChange = (event: ChangeEvent<HTMLInputElement>) => {
     setFormState(event.target.value);
@@ -28,6 +44,7 @@ const TodoForm: FC<ITodoForm> = (props: ITodoForm) => {
       // Reset the input field
       if (inputRef && inputRef.current) {
         inputRef.current.value = '';
+        setFormState('');
       }
     }
   };
@@ -35,9 +52,10 @@ const TodoForm: FC<ITodoForm> = (props: ITodoForm) => {
   return (
     <div className="todo-form">
       <input
+        className="new-todo"
         ref={inputRef}
         type="text"
-        placeholder="Enter new todo"
+        placeholder="What needs to be done?"
         onChange={(event) => handleInputChange(event)}
         onKeyPress={(event) => handleInputEnter(event)}
       />

@@ -12,7 +12,13 @@ export enum VisibilityType {
 }
 
 export const initialState: IAppState = {
-  todos: [],
+  todos: [
+    {
+      id: '111',
+      text: 'Test',
+      isCompleted: false,
+    },
+  ],
   newTodo: '',
   editTodo: '',
   visibility: VisibilityType.ALL,

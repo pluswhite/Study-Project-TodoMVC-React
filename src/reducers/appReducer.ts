@@ -4,11 +4,6 @@
 
 import { IAppState } from '../types';
 
-interface IActionType {
-  type: Actions;
-  payload?: any;
-}
-
 export enum Actions {
   CREATE_ITEM = 'CREATE_ITEM', // 新增 Todo
   UPDATE_ITEM = 'UPDATE_ITEM', // 更新 Todo
@@ -21,9 +16,16 @@ export enum Actions {
   TOGGLE_ALL = 'TOGGLE_ALL', // 全部切换为 完成/未完成
 }
 
+interface IActionType {
+  type: Actions;
+  payload?: any;
+}
+
 export const appReducer = (state: IAppState, action: IActionType) => {
+  console.log(action.type);
   switch (action.type) {
     case Actions.CREATE_ITEM: {
+      console.log(action.payload);
       return {
         ...state,
         todos: [...state.todos, action.payload],
