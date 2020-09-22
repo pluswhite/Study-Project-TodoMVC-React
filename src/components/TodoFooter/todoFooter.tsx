@@ -21,6 +21,7 @@ const TodoFooter: FC = () => {
   });
 
   const isShowClearButton = todos.some((todo) => todo.isCompleted);
+  const itemLeftCount = todos.filter((todo) => !todo.isCompleted).length;
 
   const handleVisibilityChange = (visibility: VisibilityType) => {
     dispatch({
@@ -40,7 +41,7 @@ const TodoFooter: FC = () => {
   return (
     <footer className="footer">
       <span className="todo-count">
-        <strong>1</strong> item left
+        <strong>{itemLeftCount}</strong> item left
       </span>
       <ul className="filters">
         <li onClick={() => handleVisibilityChange(VisibilityType.ALL)}>

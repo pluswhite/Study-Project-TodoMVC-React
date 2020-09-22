@@ -6,7 +6,7 @@ import './todoList.scss';
 import { AppContext } from '../../hooks/appContexts';
 import { Actions } from '../../reducers/appReducer';
 
-const TodoList: FC<ITodoList> = (props: ITodoList) => {
+const TodoList: FC = () => {
   const {
     state: { todos },
     dispatch,

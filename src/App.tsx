@@ -20,8 +20,9 @@ const AppProvider: React.FC = ({ children }) => {
 };
 
 function App() {
-  const { state, dispatch } = useContext(AppContext);
-  const { todos } = state;
+  const {
+    state: { todos },
+  } = useContext(AppContext);
 
   return (
     <AppProvider>
@@ -30,8 +31,8 @@ function App() {
           <h1>Todos</h1>
           <TodoForm />
         </header>
-        <TodoList todos={todos} />
-        <TodoFooter />
+        <TodoList />
+        {todos.length > 0 && <TodoFooter />}
       </div>
     </AppProvider>
   );
