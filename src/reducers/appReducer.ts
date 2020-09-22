@@ -39,6 +39,9 @@ export type TodoActions =
     }
   | {
       type: Actions.TOGGLE_ALL;
+      payload: {
+        toggleStatus: boolean;
+      };
     }
   | {
       type: Actions.TOGGLE_ITEM;
@@ -106,7 +109,7 @@ export const appReducer = (state: IAppState, action: TodoActions) => {
         ...state,
         todos: state.todos.map((todo) => ({
           ...todo,
-          isCompleted: !todo.isCompleted,
+          isCompleted: action.payload.toggleStatus,
         })),
       };
     }

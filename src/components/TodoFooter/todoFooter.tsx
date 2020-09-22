@@ -6,17 +6,21 @@ import { AppContext, VisibilityType } from '../../hooks/appContexts';
 import { Actions } from '../../reducers/appReducer';
 
 const TodoFooter: FC = () => {
-  const { state, dispatch } = useContext(AppContext);
-  const { visibility } = state;
+  const {
+    state: { todos, visibility },
+    dispatch,
+  } = useContext(AppContext);
   const isAllSelected = classnames({
-    ['selected']: visibility === VisibilityType.ALL,
+    selected: visibility === VisibilityType.ALL,
   });
   const isActiveSelected = classnames({
-    ['selected']: visibility === VisibilityType.ACTIVE,
+    selected: visibility === VisibilityType.ACTIVE,
   });
   const isCompletedSelected = classnames({
-    ['selected']: visibility === VisibilityType.COMPLETED,
+    selected: visibility === VisibilityType.COMPLETED,
   });
+
+  const isShowClearButton = todos.some((todo) => todo.isCompleted);
 
   const handleVisibilityChange = (visibility: VisibilityType) => {
     dispatch({
@@ -27,6 +31,12 @@ const TodoFooter: FC = () => {
     });
   };
 
+  const handleClearCompleted = () => {
+    dispatch({
+      type: Actions.CLEAR_COMPLETED,
+    });
+  };
+
   return (
     <footer className="footer">
       <span className="todo-count">
@@ -34,22 +44,29 @@ const TodoFooter: FC = () => {
       </span>
       <ul className="filters">
         <li onClick={() => handleVisibilityChange(VisibilityType.ALL)}>
-          <a href="#" className={isAllSelected}>
+          <a href="#/all" className={isAllSelected}>
             All
           </a>
         </li>
         <li onClick={() => handleVisibilityChange(VisibilityType.ACTIVE)}>
-          <a href="#" className={isActiveSelected}>
+          <a href="#/active" className={isActiveSelected}>
             Active
           </a>
         </li>
         <li onClick={() => handleVisibilityChange(VisibilityType.COMPLETED)}>
-          <a href="#" className={isCompletedSelected}>
+          <a href="#/completed" className={isCompletedSelected}>
             Completed
           </a>
         </li>
       </ul>
-      <button className="clear-completed">Clear completed</button>
+      {isShowClearButton && (
+        <button
+          className="clear-completed"
+          onClick={() => handleClearCompleted()}
+        >
+          Clear completed
+        </button>
+      )}
     </footer>
   );
 };
